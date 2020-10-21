@@ -1,3 +1,6 @@
+
+P2 submission: Link to UML files and RESTful services description: https://docs.google.com/document/d/1fVTEde0hB_mdfxGjJ4oCHhNfJFRhv9zrr_OAV_jcTYY/edit?usp=sharing
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
