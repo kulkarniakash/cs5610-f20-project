@@ -29,6 +29,7 @@ class TrackDetails extends React.Component {
                 artistsString += ', ';
             }
         }
+        return artistsString;
     }
 
     render() {
