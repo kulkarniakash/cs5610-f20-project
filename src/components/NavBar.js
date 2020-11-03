@@ -1,18 +1,19 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {useAuth0} from "@auth0/auth0-react";
+import SpotifyAuthServices from "../services/spotify-auth-services/SpotifyAuthServices";
+import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
 
-const NavBar = () => {
-    const {loginWithRedirect} = useAuth0();
-    const {logout} = useAuth0();
-    const {isAuthenticated} = useAuth0();
+const NavBar = ({user}) => {
+    const LINK_TO_AUTH = SPOTIFY_ACCOUNT_URL + '/authorize/?client_id' + '=' + CLIENT_ID + '&response_type=code' +
+        '&redirect_uri=' + AUTH_REDIRECT_URI;
     return (
         <nav className="navbar navbar-inverse" style={{borderRadius: 0}}>
             <ul className="nav navbar-nav">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About Us</a></li>
 
-                {isAuthenticated &&
+                {//isAuthenticated &&
                 <Route path='/signed-in'>
                     <li>
                         <a href='#'>My Songs</a>
@@ -20,13 +21,10 @@ const NavBar = () => {
                 </Route>}
             </ul>
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
-                <li><a onClick={() => loginWithRedirect()}>Sign in</a></li>
-                {isAuthenticated &&
-                <Route path='/signed-in'>
-                    <li><a onClick={() => logout(
-                        {returnTo: window.location.origin}
-                        )}>Log Out</a></li>
-                </Route>}
+                {(user === null &&
+                <li><a href={LINK_TO_AUTH}>Sign in</a></li>) ||
+                    <li><a href='#'>Sign out</a></li>
+                }
             </ul>
         </nav>
     )

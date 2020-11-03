@@ -3,12 +3,13 @@ import React from 'react';
 import '@fortawesome/fontawesome-free'
 import './App.css';
 import HomePage from "./containers/HomePage";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <HomePage/>
-    </div>
+      <Router>
+          <Route path='/' children={<HomePage/>}/>
+      </Router>
   );
 }
 
