@@ -1,7 +1,5 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import {useAuth0} from "@auth0/auth0-react";
-import SpotifyAuthServices from "../services/spotify-auth-services/SpotifyAuthServices";
 import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
 
 const NavBar = ({user}) => {
