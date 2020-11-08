@@ -20,7 +20,7 @@ export default class SpotifyAuthServices {
             },
             body: "grant_type=authorization_code&code=" + code + "&redirect_uri=" + encodeURIComponent(AUTH_REDIRECT_URI)
         }).then(resp => resp.json());*/
-        return fetch(JAVA_SERVER_URL + '/authaccess?code=' + code, {
+        return fetch(JAVA_SERVER_URL + 'authaccess?code=' + code, {
             method: 'POST'
         }).then(resp => resp.json())
     }
