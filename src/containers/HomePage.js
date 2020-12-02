@@ -5,11 +5,17 @@ import '../css/homepage.css'
 import SpotifyAuthServices from "../services/spotify-auth-services/SpotifyAuthServices";
 import SearchResults from "./SearchResults";
 import TrackDetails from "../components/TrackDetails";
+
+import Login from "./Login";
+import Register from "./Register";
 import LogOutPage from "../components/LogOutPage";
 import {updateAccessToken, updateAuthCode, updateCurrentUserObj, updateIsLoggedIn} from "../actions/authActions";
 import {connect} from "react-redux";
+
 import MCAuthServices from "../services/mc-auth-services/MCAuthServices";
 import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
+import AnonyFeed from "./Anony/AnonyFeed";
+import NewsFeed from "./News/NewsFeed";
 
 class HomePage extends React.Component {
 
@@ -134,14 +140,22 @@ class HomePage extends React.Component {
                     <Router>
                         <Switch>
                             <Route path='/trackdetails/:id' children={<TrackDetails accessToken={this.props.accessToken}/>}/>
-                            <Route path='/' children={<SearchResults/>}/>
+                            {/*<Route path='/' children={<SearchResults accessToken={this.state.accessToken}/>}/>*/}
+                            {/*<Route path='/' children={<NewsPost/>}></Route>*/}
+                            {/*<Route path='/' children={<SearchResults/>}/>*/}
+                            {/*<Route path='/logout' children={<LogOutPage/>}/>*/}
+                            <Route path='/songs' children={<SearchResults/>}/>
+                            <Route path='/' children={<NewsFeed/>}/>
                         </Switch>
                     </Router>
                 }
                 {!this.isLoggedIn() &&
                 <Router>
                     <Switch>
+                        <Route path='/login' children={<Login/>}/>
                         <Route path='/logout' children={<LogOutPage/>}/>
+                        <Route path='/register' children={<Register/>}></Route>
+                        <Route path='/' children={<AnonyFeed/>}></Route>
                     </Switch>
                 </Router>}
 
