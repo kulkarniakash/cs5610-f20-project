@@ -1,14 +1,13 @@
 import React from "react";
-import ReactDOM from 'react-dom'
+import NewsPost from "../News/NewsPost";
 import '@fortawesome/react-fontawesome'
 import '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
 import '../../css/NewsFeed.css'
 import '@fortawesome/fontawesome-free'
-import NewsPost from "./NewsPost";
+import AnonyPost from "./AnonyPost";
 
-export default class NewsFeed extends React.Component {
-
+export default class AnonyFeed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +17,6 @@ export default class NewsFeed extends React.Component {
 
     render() {
         return(
-
             <div className="container">
                 <label htmlFor='search'>Search feed:</label>
                 <input id='search' placeholder='Feed Name' onChange={(evt) => {
@@ -35,9 +33,9 @@ export default class NewsFeed extends React.Component {
 
                 <hr/>
                 <div className="news-feed">
-                    <NewsPost/>
+                    <AnonyPost/>
                 </div>
             </div>
         )
-    }
+}
 }
