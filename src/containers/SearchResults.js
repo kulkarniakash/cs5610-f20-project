@@ -1,8 +1,9 @@
 import React from "react";
 import SpotifyAPIService from "../services/spotify-api-services/SpotifyAPIService";
 import SearchResultsRow from "./SearchResultsRow";
+import {connect} from 'react-redux';
 
-export default class SearchResults extends React.Component {
+export class SearchResults extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -83,3 +84,9 @@ export default class SearchResults extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    accessToken: state.spotifyAuth.accessToken
+})
+
+export default connect(mapStateToProps)(SearchResults);
