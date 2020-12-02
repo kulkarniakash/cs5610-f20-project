@@ -5,6 +5,7 @@ import '../css/homepage.css'
 import SpotifyAuthServices from "../services/spotify-auth-services/SpotifyAuthServices";
 import SearchResults from "./SearchResults";
 import TrackDetails from "../components/TrackDetails";
+
 import Login from "./Login";
 import Register from "./Register";
 import LogOutPage from "../components/LogOutPage";
@@ -114,6 +115,7 @@ class HomePage extends React.Component {
                             {/*<Route path='/' children={<NewsPost/>}></Route>*/}
                             {/*<Route path='/' children={<SearchResults/>}/>*/}
                             {/*<Route path='/logout' children={<LogOutPage/>}/>*/}
+                            <Route path='/songs' children={<SearchResults/>}/>
                             <Route path='/' children={<NewsFeed/>}/>
                         </Switch>
                     </Router>
