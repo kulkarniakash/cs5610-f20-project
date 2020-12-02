@@ -4,7 +4,10 @@ import NavBar from "../components/NavBar";
 import '../css/homepage.css'
 import SpotifyAuthServices from "../services/spotify-auth-services/SpotifyAuthServices";
 import SearchResults from "./SearchResults";
+import NewsPost from "./News/NewsPost";
 import TrackDetails from "../components/TrackDetails";
+import Login from "./Login";
+import Register from "./Register";
 
 class HomePage extends React.Component {
 
@@ -64,7 +67,17 @@ class HomePage extends React.Component {
                     <Router>
                         <Switch>
                             <Route path='/trackdetails/:id' children={<TrackDetails accessToken={this.state.accessToken}/>}/>
-                            <Route path='/' children={<SearchResults accessToken={this.state.accessToken}/>}/>
+                            {/*<Route path='/' children={<SearchResults accessToken={this.state.accessToken}/>}/>*/}
+                            {/*<Route path='/' children={<NewsPost/>}></Route>*/}
+
+                        </Switch>
+                    </Router>
+                }
+                {!this.isLoggedIn() &&
+                    <Router>
+                        <Switch>
+                            <Route path='/' children={<Login/>}></Route>
+                            <Route path='/register' children={<Register/>}></Route>
                         </Switch>
                     </Router>
                 }
