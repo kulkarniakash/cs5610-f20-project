@@ -8,6 +8,8 @@ import TrackDetails from "../components/TrackDetails";
 import LogOutPage from "../components/LogOutPage";
 import {updateAccessToken, updateAuthCode, updateCurrentUserObj, updateIsLoggedIn} from "../actions/authActions";
 import {connect} from "react-redux";
+import MCAuthServices from "../services/mc-auth-services/MCAuthServices";
+import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
 
 class HomePage extends React.Component {
 
@@ -22,6 +24,8 @@ class HomePage extends React.Component {
 
         this.isLoggedIn = this.isLoggedIn.bind(this);
         this.setAuth = this.setAuth.bind(this);
+        this.LINK_TO_AUTH = SPOTIFY_ACCOUNT_URL + '/authorize/?client_id=' + CLIENT_ID + '&response_type=code' +
+            '&redirect_uri=' + AUTH_REDIRECT_URI;
     }
 
     setAuth(authCode) {
@@ -39,6 +43,18 @@ class HomePage extends React.Component {
         const {location: {search}} = this.props;
         let searchParams = new URLSearchParams(search);
         let accessToken, refreshToken;
+
+        if(localStorage.getItem('register') === 'true') {
+            if(searchParams.has('code') === false) {
+                console.log("error: no code found");
+                return;
+            }
+
+            this.testUserRegistration(searchParams.get('code'));
+            localStorage.setItem('register', 'false');
+            return;
+        }
+
         if (localStorage.getItem('access_token') !== null) {
             accessToken = localStorage.getItem('access_token');
             refreshToken = localStorage.getItem('refresh_token');
@@ -95,6 +111,18 @@ class HomePage extends React.Component {
         }
     }
 
+    //delete function after test is successful
+    testUserRegistration(code) {
+        let user = {
+            username: 'kulkarniakash',
+            first_name: 'Akash',
+            last_name: 'Kulkarni',
+        }
+
+        new MCAuthServices().registerUsername(user, code).then(resp => console.log(resp));
+    }
+
+
     render() {
         return(
             <div className='wbdv-homepage'>
@@ -116,6 +144,8 @@ class HomePage extends React.Component {
                         <Route path='/logout' children={<LogOutPage/>}/>
                     </Switch>
                 </Router>}
+
+                <a href={this.LINK_TO_AUTH} onClick={() => localStorage.setItem('register', 'true')}>Register</a>
             </div>
         )
     }
