@@ -13,16 +13,22 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About Us</a></li>
 
-                {//isAuthenticated &&
-                <Route path='/signed-in'>
-                    <li>
-                        <a href='#'>My Songs</a>
-                    </li>
-                </Route>}
+                {/*{//isAuthenticated &&*/}
+                {/*// <Route path='/signed-in'>*/}
+                {/*//     <li>*/}
+                {/*//         <a href='#'>My Songs</a>*/}
+                {/*//     </li>*/}
+                {/*// </Route>}*/}
+            </ul>
+            <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
+                {user === null &&
+                    <li><a href="/register">Register</a></li>
+                }
+
             </ul>
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {(user === null &&
-                <li><a href={LINK_TO_AUTH} onClick={() => updateIsLoggedIn(true)}>Sign in</a></li>) ||
+                    <li><a href='/login' onClick={() => updateIsLoggedIn(true)}>Sign in</a></li>) ||
                     <li><Link to='/logout' onClick={() => {
                         updateAuthCodeProp(null);
                         updateAccessTokenProp(null, null);
