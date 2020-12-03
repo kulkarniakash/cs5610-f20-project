@@ -11,7 +11,7 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
     return (
         <nav className="navbar navbar-inverse" style={{borderRadius: 0}}>
             <ul className="nav navbar-nav">
-                <li><a href="#">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="#" className='about-us'>About Us</a></li>
 
             </ul>

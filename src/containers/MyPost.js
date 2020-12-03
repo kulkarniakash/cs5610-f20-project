@@ -1,12 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
+import MCCrudServices from "../services/mc-crud-services/MCCrudServices";
 
 class MyPost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            post: ""
         }
+    }
+
+    changePostContent(evt) {
+        this.setState({post: evt.target.value});
     }
 
     render() {
@@ -18,11 +23,15 @@ class MyPost extends React.Component {
                         <div className="form-group row card-text">
 
                             <div className="login-username col-sm-9">
-                                <textarea id="w3review" placeholder="whats up" name="w3review" rows="4" cols="50"></textarea>
+                                <textarea id="w3review" placeholder="whats up" name="w3review" rows="4" cols="50"
+                                onChange={(evt) => this.changePostContent(evt)}></textarea>
                             </div>
 
                         </div>
-                        <a href={"/"} className="login-button btn btn-primary">Done</a>
+                        <a href={"/"} onClick={() => new MCCrudServices().addPost(this.props.accessToken, {
+                            post: this.state.post,
+                            author_id: this.props.userObject.id
+                        })} className="login-button btn btn-primary">Done</a>
 
                     </div>
 
@@ -35,8 +44,8 @@ class MyPost extends React.Component {
 }
 
 const stateToPropertyMapper = (state) => ({
-
-
+    accessToken: state.spotifyAuth.accessToken,
+    userObject: state.spotifyAuth.currentUserObject
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
