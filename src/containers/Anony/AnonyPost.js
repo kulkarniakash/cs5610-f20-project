@@ -5,14 +5,18 @@ import '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
 import '../../css/NewsFeed.css'
 import '@fortawesome/fontawesome-free'
+import {Link} from "react-router-dom";
 
 export default class AnonyPost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showLike: false
+            showLike: false,
+            post: this.props.post,
+            showComment: false,
         }
         this.changeShowLike = this.changeShowLike.bind(this);
+        this.changeShowComment = this.changeShowComment.bind(this);
 
     }
 
@@ -22,8 +26,15 @@ export default class AnonyPost extends React.Component {
         })
     }
 
+    changeShowComment() {
+        this.setState({
+            showComment: !this.state.showComment
+        })
+    }
+
     render() {
         return (
+
             <div className='container'>
                 <div className="card card1">
 
@@ -31,32 +42,42 @@ export default class AnonyPost extends React.Component {
                         <div className="card-head">
                                 <span>
                                     <img className="avatar-img" src="../../photo.png" className="avatar"/>
-                                    <a className="card-title user-name">User Name</a>
+                                    <Link to={"/profile"} className="card-title user-name">{this.state.post.username}</Link>
+                                    {/*<a href="#" className="card-title user-name">{this.state.post.username}</a>*/}
+
                                 </span>
 
-                            <select type="button" className="btn dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
+                            {/*<select type="button" className="btn dropdown-toggle" data-toggle="dropdown"*/}
+                            {/*        aria-haspopup="true" aria-expanded="false">*/}
 
-                                <option value="1">Action1</option>
-                                <option value="2">Action2</option>
+                            {/*    <option value="1">Action1</option>*/}
+                            {/*    <option value="2">Action2</option>*/}
 
-                            </select>
+                            {/*</select>*/}
 
 
                             <hr/>
                         </div>
-                        <p className="card-text text-wrap">Please type in somethingbmbnmbnmbnmbnmbsdfsdfsdfsdfsdfsdfsdfdsfdsfnmbnmbnmbnmbnm</p>
+                        <p className="card-text text-wrap">{this.state.post.text}</p>
                         <img className="card-img-top card-img" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Basketball_Clipart.svg" alt="Upload image if need"/>
                     </div>
+
                     {this.state.showLike &&
                     <button onClick={() => this.changeShowLike()} className='heart'><i
-                        className="fa fa-heart"></i></button>
+                        className="fa fa-thumbs-up fa-lg"></i></button>
                     }
-                    {!this.state.showLike &&
-                    <button onClick={() => this.changeShowLike()} className='heart1'><i className="fa fa-heart-o"></i></button>
+                    {this.state.showComment &&
+                    <button onClick={() => this.changeShowComment()} className='comment'>
+                        <i className="fa fa-thumbs-down fa-lg"></i>
+                    </button>
                     }
-                    <button className='comment'><i className="fa fa-comment"></i></button>
 
+                    {!this.state.showLike &&
+                    <button onClick={() => this.changeShowLike()} className='heart1'><i className="fa fa-thumbs-up fa-lg"></i></button>
+                    }
+                    {!this.state.showComment &&
+                    <button onClick={() => this.changeShowComment()} className='comment1'><i className="fa fa-thumbs-down fa-lg"></i></button>
+                    }
 
 
                 </div>

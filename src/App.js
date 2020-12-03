@@ -7,8 +7,10 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import {Provider} from "react-redux";
 import {combineReducers, createStore, compose} from "redux";
 import authReducer from "./reducers/authReducer";
+import {loginFeedsReducer} from "./reducers/loginFeedsReducer";
+import {anonyFeedsReducer} from "./reducers/anonyFeedsReducer";
 
-const rootReducer = combineReducers({spotifyAuth: authReducer})
+const rootReducer = combineReducers({spotifyAuth: authReducer, loginFeedsReducer: loginFeedsReducer, anonyFeedsReducer})
 
 const enhancers = compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

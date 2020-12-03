@@ -5,11 +5,11 @@ import '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
 import '../../css/NewsPost.css'
 import '@fortawesome/fontawesome-free'
-import NewsPost from "./NewsPost";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import AdminPost from "./AdminPost";
 
-class NewsFeed extends React.Component {
+class AdminFeed extends React.Component {
 
     constructor(props) {
         super(props);
@@ -31,7 +31,6 @@ class NewsFeed extends React.Component {
                     }} />
                     <button className='btn btn-outline-danger' >Search</button>
 
-                    <Link to={'/my-post'} className='my-new-post'>My New Post</Link>
                 </div>
 
                 <hr/>
@@ -41,7 +40,7 @@ class NewsFeed extends React.Component {
                 {
                     this.props.posts.map(post =>
                         <div key={post.id}>
-                            <NewsPost post={post}/>
+                            <AdminPost post={post}/>
                         </div>
                     )
                 }
@@ -63,4 +62,4 @@ const propertyToDispatchMapper = (dispatch) => ({
 export default connect
 ( stateToPropertyMapper,
     propertyToDispatchMapper)
-(NewsFeed)
+(AdminFeed)
