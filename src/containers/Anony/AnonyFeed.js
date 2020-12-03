@@ -3,11 +3,12 @@ import NewsPost from "../News/NewsPost";
 import '@fortawesome/react-fontawesome'
 import '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
-import '../../css/NewsFeed.css'
 import '@fortawesome/fontawesome-free'
+import '../../css/NewsPost.css'
+import {connect} from "react-redux";
 import AnonyPost from "./AnonyPost";
 
-export default class AnonyFeed extends React.Component {
+class AnonyFeed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,10 +33,28 @@ export default class AnonyFeed extends React.Component {
                 }}>Search</button>
 
                 <hr/>
-                <div className="news-feed">
-                    <AnonyPost/>
-                </div>
+                {
+                    this.props.posts.map(post =>
+                        <div key={post.id}>
+                            <AnonyPost post={post}/>
+                        </div>
+                    )
+                }
             </div>
         )
 }
 }
+
+const stateToPropertyMapper = (state) => ({
+    posts:state.anonyFeedsReducer.posts,
+
+})
+
+const propertyToDispatchMapper = (dispatch) => ({
+
+})
+
+export default connect
+( stateToPropertyMapper,
+    propertyToDispatchMapper)
+(AnonyFeed)

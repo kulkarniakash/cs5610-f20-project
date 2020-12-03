@@ -4,9 +4,22 @@
     top:20px
 }
 
+.my-new-post {
+    position:absolute;
+    left: 1000px;
+    text-decoration: none;
+    color: black;
+}
+
+.my-new-post:hover{
+    text-decoration: none;
+}
+
 hr {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+

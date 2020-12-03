@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
 import {updateAccessToken, updateAuthCode, updateCurrentUserObj, updateIsLoggedIn} from "../actions/authActions";
 import {connect} from 'react-redux';
+import '../css/Nav.css'
 
 const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenProp, updateUserObjProp}) => {
     const LINK_TO_AUTH = SPOTIFY_ACCOUNT_URL + '/authorize/?client_id=' + CLIENT_ID + '&response_type=code' +
@@ -11,20 +12,18 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
         <nav className="navbar navbar-inverse" style={{borderRadius: 0}}>
             <ul className="nav navbar-nav">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="#" className='about-us'>About Us</a></li>
 
-                {/*{//isAuthenticated &&*/}
-                {/*// <Route path='/signed-in'>*/}
-                {/*//     <li>*/}
-                {/*//         <a href='#'>My Songs</a>*/}
-                {/*//     </li>*/}
-                {/*// </Route>}*/}
+            </ul>
+            <ul className='nav nav-songs navbar-nav navbar-right'>
+                {user !== null &&
+                <li><a href="/songs">Songs</a></li>
+                }
             </ul>
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {user === null &&
                     <li><a href="/register">Register</a></li>
                 }
-
             </ul>
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {(user === null &&
