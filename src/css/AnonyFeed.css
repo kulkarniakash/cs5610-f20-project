@@ -1,4 +1,4 @@
-.card1 {
+.card {
     /*width: 50rem;*/
     background-color: bisque;
     width: 60rem;
@@ -7,15 +7,6 @@
     float: none; /* Added */
     margin-bottom: 10px; /* Added */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-.card-for-comment {
-    width: 60rem;
-    height: auto;
-    margin: 0 auto; /* Added */
-    float: none; /* Added */
-    margin-bottom: 10px; /* Added */
-
 }
 
 .card-text {

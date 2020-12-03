@@ -6,7 +6,7 @@ import 'font-awesome/css/font-awesome.css'
 import '../../css/NewsFeed.css'
 import '@fortawesome/fontawesome-free'
 
-export default class NewsPost extends React.Component {
+export default class AdminPost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,32 +33,33 @@ export default class NewsPost extends React.Component {
     render() {
         return (
             <div className='container'>
+
                 <div className="card card1">
 
-                        <div className="card-body">
-                            <div className="card-head">
+                    <div className="card-body">
+                        <div className="card-head">
                                 <span>
                                     <img className="avatar-img" src="../../photo.png" className="avatar"/>
                                     <a className="card-title user-name">{this.state.post.username}</a>
                                 </span>
 
-                                <select type="button" className="btn dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
+                            <select type="button" className="btn dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
 
-                                        <option value="1">Report</option>
+                                <option value="1">Report</option>
+                                <option value="2">Delete</option>
+
+                            </select>
 
 
-                                </select>
-
-
-                                <hr/>
-                            </div>
-                            <p className="card-text text-wrap">{this.state.post.text}</p>
-                            <img className="card-img-top card-img" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Basketball_Clipart.svg" alt="Upload image if need"/>
+                            <hr/>
                         </div>
+                        <p className="card-text text-wrap">{this.state.post.text}</p>
+                        <img className="card-img-top card-img" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Basketball_Clipart.svg" alt="Upload image if need"/>
+                    </div>
                     {this.state.showLike &&
-                        <button onClick={() => this.changeShowLike()} className='heart'><i
-                            className="fa fa-thumbs-up fa-lg"></i></button>
+                    <button onClick={() => this.changeShowLike()} className='heart'><i
+                        className="fa fa-thumbs-up fa-lg"></i></button>
                     }
                     {this.state.showComment &&
                     <button onClick={() => this.changeShowComment()} className='comment'>
@@ -67,7 +68,7 @@ export default class NewsPost extends React.Component {
                     }
 
                     {!this.state.showLike &&
-                        <button onClick={() => this.changeShowLike()} className='heart1'><i className="fa fa-thumbs-up fa-lg"></i></button>
+                    <button onClick={() => this.changeShowLike()} className='heart1'><i className="fa fa-thumbs-up fa-lg"></i></button>
                     }
                     {!this.state.showComment &&
                     <button onClick={() => this.changeShowComment()} className='comment1'><i className="fa fa-thumbs-down fa-lg"></i></button>
@@ -81,6 +82,11 @@ export default class NewsPost extends React.Component {
                         <button className="reply-for-comment"><i className="fa fa-reply fa-lg"></i></button>
                     </form>
                 </div>
+                {/*{this.state.post.comments.map(comment =>*/}
+                {/*    <div key={comment.id}>*/}
+                {/*        {comment.text}*/}
+                {/*    </div>*/}
+                {/*)}*/}
                 {this.state.post.comments.map(comment =>
                     <div key={comment.id}>
                         <div className="card card-for-comment">

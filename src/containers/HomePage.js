@@ -16,6 +16,9 @@ import MCAuthServices from "../services/mc-auth-services/MCAuthServices";
 import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
 import AnonyFeed from "./Anony/AnonyFeed";
 import NewsFeed from "./News/NewsFeed";
+import Profile from "./Profile";
+import MyPost from "./MyPost";
+import AdminFeed from "./Admin/AdminFeed";
 
 class HomePage extends React.Component {
 
@@ -145,7 +148,11 @@ class HomePage extends React.Component {
                             {/*<Route path='/' children={<SearchResults/>}/>*/}
                             {/*<Route path='/logout' children={<LogOutPage/>}/>*/}
                             <Route path='/songs' children={<SearchResults/>}/>
+                            <Route path='/profile' children={<Profile/>}/>
+                            <Route path='/my-post' children={<MyPost/>}/>
+                            <Route path='/admin' children={<AdminFeed/>}></Route>
                             <Route path='/' children={<NewsFeed/>}/>
+
                         </Switch>
                     </Router>
                 }
@@ -155,6 +162,7 @@ class HomePage extends React.Component {
                         <Route path='/login' children={<Login/>}/>
                         <Route path='/logout' children={<LogOutPage/>}/>
                         <Route path='/register' children={<Register/>}></Route>
+
                         <Route path='/' children={<AnonyFeed/>}></Route>
                     </Switch>
                 </Router>}
