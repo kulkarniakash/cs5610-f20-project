@@ -51,14 +51,56 @@ class HomePage extends React.Component {
         let accessToken, refreshToken;
 
         if(localStorage.getItem('register') === 'true') {
-            if(searchParams.has('code') === false) {
+            if (searchParams.has('code') === false) {
                 console.log("error: no code found");
                 return;
             }
 
-            this.testUserRegistration(searchParams.get('code'));
+            const register_info = JSON.parse(localStorage.getItem('register_info'));
+            if (register_info.error !== undefined) {
+                console.log("error: invalid user registration");
+                localStorage.setItem('register_info', null);
+                localStorage.setItem('register', 'false');
+                return;
+            }
+
+            const user = {
+                username: register_info.username,
+                first_name: register_info.first_name,
+                last_name: register_info.last_name
+            }
+
             localStorage.setItem('register', 'false');
+            new MCAuthServices().registerUsername(user, searchParams.get('code')).then(resp => console.log(resp))
             return;
+        }
+
+        if(localStorage.getItem('login') === 'true') {
+            if (!this.props.currentUserObject && searchParams.has("code")) {
+                localStorage.setItem('auth_code', searchParams.get("code"));
+                let authCode = searchParams.get("code");
+                new SpotifyAuthServices().getTokens(authCode).then(resp => {
+                    if (resp.error === undefined) {
+                        new SpotifyAuthServices().getCurrentUserProfile(resp.access_token).then(resp2 => {
+                            new MCAuthServices().verifyUsername(resp2.id, localStorage.getItem('username')).then(resp3 => {
+                                localStorage.setItem('login', 'false');
+                                localStorage.setItem('username', '');
+                                if(resp3.error !== undefined) {
+                                    localStorage.setItem('access_token', null);
+                                    localStorage.setItem('refresh_token', null);
+                                    console.log("error: username combination not recognized");
+                                } else {
+                                    localStorage.setItem('access_token', resp.access_token);
+                                    localStorage.setItem('refresh_token', resp.refresh_token);
+                                    this.props.updateAccessToken(accessToken, refreshToken);
+                                    this.setAuth(authCode);
+                                }
+                            })
+                        })
+                    }
+                });
+            }
+            localStorage.setItem('login', 'false');
         }
 
         if (localStorage.getItem('access_token') !== null) {
@@ -74,18 +116,7 @@ class HomePage extends React.Component {
             });
         }
 
-        if (!this.props.currentUserObject && searchParams.has("code")) {
-            localStorage.setItem('auth_code', searchParams.get("code"));
-            let authCode = searchParams.get("code");
-            new SpotifyAuthServices().getTokens(authCode).then(resp => {
-                if (resp.error === undefined) {
-                    localStorage.setItem('access_token', resp.access_token);
-                    localStorage.setItem('refresh_token', resp.refresh_token);
-                    this.props.updateAccessToken(accessToken, refreshToken);
-                    this.setAuth(authCode);
-                }
-            });
-        }
+
 
         /*if(searchParams.has("code")) {
             localStorage.setItem('auth_code', searchParams.get("code"));
@@ -115,17 +146,6 @@ class HomePage extends React.Component {
         } else {
             return true;
         }
-    }
-
-    //delete function after test is successful
-    testUserRegistration(code) {
-        let user = {
-            username: 'kulkarniakash',
-            first_name: 'Akash',
-            last_name: 'Kulkarni',
-        }
-
-        new MCAuthServices().registerUsername(user, code).then(resp => console.log(resp));
     }
 
 
@@ -158,8 +178,6 @@ class HomePage extends React.Component {
                         <Route path='/' children={<AnonyFeed/>}></Route>
                     </Switch>
                 </Router>}
-
-                <a href={this.LINK_TO_AUTH} onClick={() => localStorage.setItem('register', 'true')}>Register</a>
             </div>
         )
     }

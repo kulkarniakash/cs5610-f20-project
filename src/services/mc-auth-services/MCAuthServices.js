@@ -10,4 +10,10 @@ export default class MCAuthServices {
             }
         }).then(resp => resp.json());
     }
+
+    verifyUsername(userId, username) {
+        return fetch(JAVA_SERVER_URL + "login/" + userId + "/" + username, {
+            method: 'GET',
+        }).then(resp => resp.json());
+    }
 }

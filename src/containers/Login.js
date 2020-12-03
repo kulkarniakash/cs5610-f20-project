@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
 import '../css/login.css'
+import MCAuthServices from "../services/mc-auth-services/MCAuthServices";
 //LINK_TO_AUTH
 
 // <a  href={this.LINK_TO_AUTH}>
@@ -10,9 +11,19 @@ import '../css/login.css'
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            username: ""
+        }
         this.LINK_TO_AUTH = SPOTIFY_ACCOUNT_URL + '/authorize/?client_id' + '=' + CLIENT_ID + '&response_type=code' +
             '&redirect_uri=' + AUTH_REDIRECT_URI;
+
+        this.changeUsername = this.changeUsername.bind(this);
         }
+
+        changeUsername(evt) {
+            this.setState({username: evt.target.value});
+        }
+
 
 
     render() {
@@ -26,11 +37,14 @@ export default class Login extends React.Component {
                                 <div className="login-username col-sm-9">
                                     Username
                                     <input className="form-control wbdv-field wbdv-username" type="text" id="username"
-                                           name="username"/>
+                                           name="username" onChange={(evt) => this.changeUsername(evt)}/>
                                 </div>
 
                             </div>
-                            <a href={this.LINK_TO_AUTH} className="login-button btn btn-primary">Spotify Login</a>
+                            <a href={this.LINK_TO_AUTH} onClick={() => {
+                                localStorage.setItem('login', 'true')
+                                localStorage.setItem('username', this.state.username)
+                            }} className="login-button btn btn-primary">Spotify Login</a>
 
                         </div>
 
