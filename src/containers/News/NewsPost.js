@@ -39,7 +39,7 @@ export default class NewsPost extends React.Component {
                             <div className="card-head">
                                 <span>
                                     <img className="avatar-img" src="../../photo.png" className="avatar"/>
-                                    <a className="card-title user-name">{this.state.post.username}</a>
+                                    <a className="card-title user-name">{this.state.post.user.username}</a>
                                 </span>
 
                                 <select type="button" className="btn dropdown-toggle" data-toggle="dropdown"
@@ -53,7 +53,7 @@ export default class NewsPost extends React.Component {
 
                                 <hr/>
                             </div>
-                            <p className="card-text text-wrap">{this.state.post.text}</p>
+                            <p className="card-text text-wrap">{this.state.post.post}</p>
                             <img className="card-img-top card-img" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Basketball_Clipart.svg" alt="Upload image if need"/>
                         </div>
                     {this.state.showLike &&
@@ -81,7 +81,7 @@ export default class NewsPost extends React.Component {
                         <button className="reply-for-comment"><i className="fa fa-reply fa-lg"></i></button>
                     </form>
                 </div>
-                {this.state.post.comments.map(comment =>
+                {/*this.state.post.comments.map(comment =>
                     <div key={comment.id}>
                         <div className="card card-for-comment">
                             {comment.text}
@@ -89,7 +89,7 @@ export default class NewsPost extends React.Component {
 
                         </div>
                     </div>
-                )}
+                )*/}
 
 
 
