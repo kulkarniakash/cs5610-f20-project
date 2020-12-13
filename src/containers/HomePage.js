@@ -16,9 +16,14 @@ import MCAuthServices from "../services/mc-auth-services/MCAuthServices";
 import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
 import AnonyFeed from "./Anony/AnonyFeed";
 import NewsFeed from "./News/NewsFeed";
-import Profile from "./Profile";
+import AnonyProfile from "./profile/AnonyProfile";
 import MyPost from "./MyPost";
 import AdminFeed from "./Admin/AdminFeed";
+import LoginProfile from "./profile/LoginProfile";
+import ErrorPage from "./ErrorPage";
+import AdminProfile from "./profile/AdminProfile";
+import MyProfile from "./profile/MyProfile";
+import Privacy from "./Privacy";
 
 class HomePage extends React.Component {
 
@@ -168,9 +173,9 @@ class HomePage extends React.Component {
                             {/*<Route path='/' children={<SearchResults/>}/>*/}
                             {/*<Route path='/logout' children={<LogOutPage/>}/>*/}
                             <Route path='/songs' children={<SearchResults/>}/>
-                            <Route path='/profile' children={<Profile/>}/>
+
                             <Route path='/my-post' children={<MyPost/>}/>
-                            <Route path='/admin' children={<AdminFeed/>}></Route>
+
                             <Route path='/' children={<NewsFeed/>}/>
 
                         </Switch>
@@ -179,11 +184,30 @@ class HomePage extends React.Component {
                 {!this.isLoggedIn() &&
                 <Router>
                     <Switch>
+                        {/*below are change route to login*/}
+                        <Route path='/errorpage' children={<ErrorPage/>}/>
+                        <Route path='/admin' children={<AdminFeed/>}></Route>
+                        {/*<Route path='/adminProfile/:pid' children={<AdminProfile/>}/>*/}
+                        <Route path='/adminProfile' children={<AdminProfile/>}/>
+                        <Route path='/loginFirstPage' children={<NewsFeed/>}/>
+                        <Route path='/loginProfile/:pid' children={<LoginProfile/>}/>
+                        <Route path='/myprofile' children={<MyProfile/>}/>
+                        {/*above are change route to login*/}
+                        <Route path='/privacy' children={<Privacy/>}/>
                         <Route path='/login' children={<Login/>}/>
                         <Route path='/logout' children={<LogOutPage/>}/>
-                        <Route path='/register' children={<Register/>}></Route>
 
+                        <Route path='/register' children={<Register/>}></Route>
+                        <Route path='/profile/:pid' children={<AnonyProfile/>}/>
                         <Route path='/' children={<AnonyFeed/>}></Route>
+
+
+
+                        <Route path='/loginprofile/:pid' children={<LoginProfile/>}/>
+
+
+
+                        <Route path='/' children={<AnonyFeed/>}/>
                     </Switch>
                 </Router>}
             </div>
@@ -195,7 +219,8 @@ const mapDispatchToProps = (dispatch) => ({
     updateAuthCode: (authCode) => updateAuthCode(authCode, dispatch),
     updateAccessToken: (accessToken, refreshToken) => updateAccessToken(accessToken, refreshToken, dispatch),
     updateIsLoggedIn: (isLoggedIn) => updateIsLoggedIn(isLoggedIn, dispatch),
-    updateCurrentUserObj: (userObj) => updateCurrentUserObj(userObj, dispatch)
+    updateCurrentUserObj: (userObj) => updateCurrentUserObj(userObj, dispatch),
+    findPostById: (postId) => dispatch({type: "FIND_POST_BY_ID", postId}),
 })
 
 const mapStateToProps = state => ({
@@ -203,7 +228,7 @@ const mapStateToProps = state => ({
     accessToken: state.spotifyAuth.accessToken,
     refreshToken: state.spotifyAuth.refreshToken,
     isLoggedIn: state.spotifyAuth.isLoggedIn,
-    currentUserObject: state.spotifyAuth.currentUserObject
+    currentUserObject: state.spotifyAuth.currentUserObject,
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePage));

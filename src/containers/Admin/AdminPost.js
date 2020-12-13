@@ -5,6 +5,7 @@ import '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
 import '../../css/NewsFeed.css'
 import '@fortawesome/fontawesome-free'
+import {Link} from "react-router-dom";
 
 export default class AdminPost extends React.Component {
     constructor(props) {
@@ -39,8 +40,10 @@ export default class AdminPost extends React.Component {
                     <div className="card-body">
                         <div className="card-head">
                                 <span>
-                                    <img className="avatar-img" src="../../photo.png" className="avatar"/>
-                                    <a className="card-title user-name">{this.state.post.username}</a>
+                                    <img className="avatar-img" src={require('../../photo.png')} className="avatar" />
+                                    <Link to={'/adminProfile/${this.state.post.id}'} className="card-title user-name">
+                                        {this.state.post.username}
+                                    </Link>
                                 </span>
 
                             <select type="button" className="btn dropdown-toggle" data-toggle="dropdown"
