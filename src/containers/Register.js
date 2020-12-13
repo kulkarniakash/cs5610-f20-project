@@ -52,7 +52,7 @@ export default class Register extends React.Component {
     render() {
         return (
             <div className="container">
-                <div className="card1">
+                <div className="card-new">
                     <h1 className="register card-header">Register</h1>
                     <div className="card-body">
                         <div className="card2 form-group row card-text">
@@ -73,6 +73,12 @@ export default class Register extends React.Component {
                                 Last Name
                                 <input className="form-control wbdv-field wbdv-username" type="text" id="username"
                                        name="username" onChange={(evt) => this.changeLastname(evt)}/>
+                            </div>
+
+                            <div className="lastname col-sm-9">
+                                Admin Code
+                                <input className="form-control wbdv-field wbdv-username" type="text" id="username"
+                                       name="username"/>
                             </div>
                         </div>
                         <a href={this.LINK_TO_AUTH}><button className="register-button btn btn-primary" onClick={this.storeRegistrationInfo}>Spotify Register</button></a>

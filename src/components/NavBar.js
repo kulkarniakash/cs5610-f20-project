@@ -20,11 +20,20 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
                 <li><a href="/songs">Songs</a></li>
                 }
             </ul>
+
+            <ul className='nav navbar-nav navbar-right reported-posts'>
+                {user === null &&
+                <li><button>Reported Posts</button></li>
+                }
+            </ul>
+
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {user === null &&
                     <li><a href="/register">Register</a></li>
                 }
             </ul>
+
+
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {(user === null &&
                     <li><a href='/login' onClick={() => updateIsLoggedIn(true)}>Sign in</a></li>) ||
@@ -39,6 +48,12 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
                     }}>
                         Sign out
                     </Link></li>
+                }
+            </ul>
+
+            <ul className='nav navbar-nav navbar-right reported-posts'>
+                {user === null &&
+                <li><button>My feeds</button></li>
                 }
             </ul>
         </nav>

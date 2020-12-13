@@ -41,8 +41,11 @@ export default class AnonyPost extends React.Component {
                     <div className="card-body">
                         <div className="card-head">
                                 <span>
-                                    <img className="avatar-img" src="../../photo.png" className="avatar"/>
-                                    <Link to={"/profile"} className="card-title user-name">{this.state.post.username}</Link>
+                                    {/*<img className="avatar-img" src="../../photo.png" className="avatar"/>*/}
+                                    <img className="avatar-img" src={require('../../photo.png')} className="avatar" />
+                                    <Link to={'/profile/${this.state.post.id}'} className="card-title user-name">
+                                        {this.state.post.username}
+                                    </Link>
                                     {/*<a href="#" className="card-title user-name">{this.state.post.username}</a>*/}
 
                                 </span>
@@ -59,7 +62,6 @@ export default class AnonyPost extends React.Component {
                             <hr/>
                         </div>
                         <p className="card-text text-wrap">{this.state.post.text}</p>
-                        <img className="card-img-top card-img" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Basketball_Clipart.svg" alt="Upload image if need"/>
                     </div>
 
                     {this.state.showLike &&

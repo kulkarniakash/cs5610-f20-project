@@ -5,6 +5,7 @@ import '@fortawesome/free-solid-svg-icons'
 import 'font-awesome/css/font-awesome.css'
 import '../../css/NewsFeed.css'
 import '@fortawesome/fontawesome-free'
+import {Link} from "react-router-dom";
 
 export default class NewsPost extends React.Component {
     constructor(props) {
@@ -38,8 +39,10 @@ export default class NewsPost extends React.Component {
                         <div className="card-body">
                             <div className="card-head">
                                 <span>
-                                    <img className="avatar-img" src="../../photo.png" className="avatar"/>
-                                    <a className="card-title user-name">{this.state.post.username}</a>
+                                     <img className="avatar-img" src={require('../../photo.png')} className="avatar" />
+                                    <Link to={'/loginProfile/${this.state.post.id}'} className="card-title user-name">
+                                        {this.state.post.username}
+                                    </Link>
                                 </span>
 
                                 <select type="button" className="btn dropdown-toggle" data-toggle="dropdown"
@@ -54,7 +57,6 @@ export default class NewsPost extends React.Component {
                                 <hr/>
                             </div>
                             <p className="card-text text-wrap">{this.state.post.text}</p>
-                            <img className="card-img-top card-img" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Basketball_Clipart.svg" alt="Upload image if need"/>
                         </div>
                     {this.state.showLike &&
                         <button onClick={() => this.changeShowLike()} className='heart'><i
