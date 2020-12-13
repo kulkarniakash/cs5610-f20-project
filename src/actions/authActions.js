@@ -2,7 +2,7 @@ import {
     CHANGE_LOGIN_STATUS,
     UPDATE_AUTH_CODE,
     UPDATE_CURRENT_USER_OBJ,
-    UPDATE_SPOTIFY_TOKENS
+    UPDATE_SPOTIFY_TOKENS,
 } from "../constants/actionConstants";
 
 export const updateAccessToken = (accessToken, refreshToken, dispatch) => {
@@ -32,4 +32,7 @@ export const updateCurrentUserObj = (userObj, dispatch) => {
         type: UPDATE_CURRENT_USER_OBJ,
         currentUserObject: userObj
     })
+
 }
+
+

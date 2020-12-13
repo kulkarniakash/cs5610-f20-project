@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class Profile extends React.Component {
+export default class ErrorPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,7 +11,7 @@ export default class Profile extends React.Component {
 
     render() {
         return(
-            <div>abc</div>
+            <div>Error Page</div>
         )
     }
 }
