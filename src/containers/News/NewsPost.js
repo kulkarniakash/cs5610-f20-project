@@ -83,7 +83,7 @@ export default class NewsPost extends React.Component {
                         <button className="reply-for-comment"><i className="fa fa-reply fa-lg"></i></button>
                     </form>
                 </div>
-                {this.state.post.comments.map(comment =>
+                {/*this.state.post.comments.map(comment =>
                     <div key={comment.id}>
                         <div className="card card-for-comment">
                             {comment.text}
@@ -91,7 +91,7 @@ export default class NewsPost extends React.Component {
 
                         </div>
                     </div>
-                )}
+                )*/}
 
 
 

@@ -8,17 +8,35 @@ import '@fortawesome/fontawesome-free'
 import NewsPost from "./NewsPost";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import MCCrudServices from "../../services/mc-crud-services/MCCrudServices";
 
 class NewsFeed extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            showLike: false
+            posts: null,
+            hasLoaded: false
         }
     }
 
+    componentDidMount() {
+        new MCCrudServices().getAllPosts().then(postData => {
+            this.setState({posts: postData, hasLoaded: true})
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        new MCCrudServices().getAllPosts().then(postData => {
+            this.setState({posts: postData, hasLoaded: true})
+        })
+    }
+
     render() {
+        if (!this.state.hasLoaded) {
+            return <h2>Loading...</h2>
+        }
+
         return(
 
             <div className="container">
@@ -35,11 +53,8 @@ class NewsFeed extends React.Component {
                 </div>
 
                 <hr/>
-                {/*<div className="news-feed">*/}
-                {/*    <NewsPost/>*/}
-                {/*</div>*/}
                 {
-                    this.props.posts.map(post =>
+                    this.state.posts.map(post =>
                         <div key={post.id}>
                             <NewsPost post={post}/>
                         </div>
