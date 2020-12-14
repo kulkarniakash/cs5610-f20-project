@@ -8,6 +8,25 @@ import '../css/Nav.css'
 const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenProp, updateUserObjProp}) => {
     const LINK_TO_AUTH = SPOTIFY_ACCOUNT_URL + '/authorize/?client_id=' + CLIENT_ID + '&response_type=code' +
         '&redirect_uri=' + AUTH_REDIRECT_URI;
+
+    function loggedInComp() {
+        return <span>
+        <li><Link to='/logout' onClick={() => {
+            updateAuthCodeProp(null);
+            updateAccessTokenProp(null, null);
+            localStorage.setItem('auth_code', null);
+            localStorage.setItem('access_token', null);
+            localStorage.setItem('refresh_token', null);
+            updateIsLoggedIn(false);
+            updateUserObjProp(null);
+        }}>
+            Sign out
+        </Link></li>
+        <li><Link to='/myprofile'>My Profile</Link></li>
+        </span>
+
+    }
+
     return (
         <nav className="navbar navbar-inverse" style={{borderRadius: 0}}>
             <ul className="nav navbar-nav">
@@ -35,19 +54,24 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
 
 
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
+                {(user !== null &&
+                <li><a href='/myprofile'>My Profile</a></li>)}
+            </ul>
+
+            <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {(user === null &&
                     <li><a href='/login' onClick={() => updateIsLoggedIn(true)}>Sign in</a></li>) ||
-                    <li><Link to='/logout' onClick={() => {
-                        updateAuthCodeProp(null);
-                        updateAccessTokenProp(null, null);
-                        localStorage.setItem('auth_code', null);
-                        localStorage.setItem('access_token', null);
-                        localStorage.setItem('refresh_token', null);
-                        updateIsLoggedIn(false);
-                        updateUserObjProp(null);
-                    }}>
-                        Sign out
-                    </Link></li>
+        <li><Link to='/logout' onClick={() => {
+            updateAuthCodeProp(null);
+            updateAccessTokenProp(null, null);
+            localStorage.setItem('auth_code', null);
+            localStorage.setItem('access_token', null);
+            localStorage.setItem('refresh_token', null);
+            updateIsLoggedIn(false);
+            updateUserObjProp(null);
+        }}>
+            Sign out
+        </Link></li>
                 }
             </ul>
 

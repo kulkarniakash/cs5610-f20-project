@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-free'
 import '../../css/NewsPost.css'
 import {connect} from "react-redux";
 import AnonyPost from "./AnonyPost";
+import {getAllPosts} from "../../actions/mcCrudActions";
 
 class AnonyFeed extends React.Component {
     constructor(props) {
@@ -14,6 +15,10 @@ class AnonyFeed extends React.Component {
         this.state = {
             showLike: false
         }
+    }
+
+    componentDidMount() {
+        this.props.updatePosts();
     }
 
     render() {
@@ -51,7 +56,7 @@ const stateToPropertyMapper = (state) => ({
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
-
+    updatePosts: () => getAllPosts(dispatch)
 })
 
 export default connect

@@ -173,7 +173,7 @@ class HomePage extends React.Component {
                             {/*<Route path='/' children={<SearchResults/>}/>*/}
                             {/*<Route path='/logout' children={<LogOutPage/>}/>*/}
                             <Route path='/songs' children={<SearchResults/>}/>
-
+                            <Route path='/myprofile' children={<MyProfile/>}/>
                             <Route path='/my-post' children={<MyPost/>}/>
 
                             <Route path='/' children={<NewsFeed/>}/>
@@ -191,7 +191,6 @@ class HomePage extends React.Component {
                         <Route path='/adminProfile' children={<AdminProfile/>}/>
                         <Route path='/loginFirstPage' children={<NewsFeed/>}/>
                         <Route path='/loginProfile/:pid' children={<LoginProfile/>}/>
-                        <Route path='/myprofile' children={<MyProfile/>}/>
                         {/*above are change route to login*/}
                         <Route path='/privacy' children={<Privacy/>}/>
                         <Route path='/login' children={<Login/>}/>

@@ -14,4 +14,8 @@ export default class MCCrudServices {
     getAllPosts() {
         return fetch(JAVA_SERVER_URL + 'posts').then(resp => resp.json());
     }
+
+    getUserById(uid) {
+        return fetch(JAVA_SERVER_URL + 'user?uid=' + uid).then(user => user.json())
+    }
 }

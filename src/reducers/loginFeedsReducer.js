@@ -1,6 +1,8 @@
+import {GET_POSTS} from "../constants/actionConstants";
+
 const initialState = {
     posts:[
-        {
+        /*{
             "id": "1",
             "username": "max",
             "text": "hello max",
@@ -10,7 +12,7 @@ const initialState = {
                 {"id": 3, "text":"great"},
             ],
         },
-        {"id": "2", "username": "akash", "text": "hello akash", "comments": []}
+        {"id": "2", "username": "akash", "text": "hello akash", "comments": []}*/
     ],
     // username: null,
     // text: null
@@ -18,6 +20,13 @@ const initialState = {
 
 export const loginFeedsReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        case GET_POSTS:
+            return {
+                ...state,
+                posts: action.posts
+            }
+
         default:
             return state
     }

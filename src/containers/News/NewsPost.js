@@ -41,7 +41,7 @@ export default class NewsPost extends React.Component {
                                 <span>
                                      <img className="avatar-img" src={require('../../photo.png')} className="avatar" />
                                     <Link to={'/loginProfile/${this.state.post.id}'} className="card-title user-name">
-                                        {this.state.post.username}
+                                        {this.state.post.user.username}
                                     </Link>
                                 </span>
 
@@ -56,7 +56,7 @@ export default class NewsPost extends React.Component {
 
                                 <hr/>
                             </div>
-                            <p className="card-text text-wrap">{this.state.post.text}</p>
+                            <p className="card-text text-wrap">{this.state.post.post}</p>
                         </div>
                     {this.state.showLike &&
                         <button onClick={() => this.changeShowLike()} className='heart'><i
