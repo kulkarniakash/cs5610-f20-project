@@ -33,7 +33,7 @@ export default class AdminProfile extends React.Component {
                             </div>
 
                         </div>
-                        <a className="login-button btn btn-primary">Back to main page</a>
+                        <a href='/' className="login-button btn btn-primary">Back to main page</a>
 
                     </div>
 

@@ -8,7 +8,8 @@ export default class Register extends React.Component {
         this.state = {
             username: "",
             first_name: "",
-            last_name: ""
+            last_name: "",
+            admin_code: ""
         }
 
         this.LINK_TO_AUTH = SPOTIFY_ACCOUNT_URL + '/authorize/?client_id=' + CLIENT_ID + '&response_type=code' +
@@ -17,6 +18,11 @@ export default class Register extends React.Component {
         this.changeLastname = this.changeLastname.bind(this);
         this.changeFirstname = this.changeFirstname.bind(this);
         this.storeRegistrationInfo = this.storeRegistrationInfo.bind(this);
+        this.changeAdminCode = this.changeAdminCode.bind(this);
+    }
+
+    changeAdminCode(evt) {
+        this.setState({admin_code: evt.target.value})
     }
 
     changeUsername(evt) {
@@ -43,11 +49,13 @@ export default class Register extends React.Component {
         const user = {
             username: this.state.username,
             first_name: this.state.first_name,
-            last_name: this.state.last_name
+            last_name: this.state.last_name,
+            admin_code: this.state.admin_code
         }
 
         localStorage.setItem('register', 'true');
         localStorage.setItem('register_info', JSON.stringify(user));
+        localStorage.setItem('admin_code', user.admin_code);
     }
     render() {
         return (
@@ -78,10 +86,14 @@ export default class Register extends React.Component {
                             <div className="lastname col-sm-9">
                                 Admin Code
                                 <input className="form-control wbdv-field wbdv-username" type="text" id="username"
-                                       name="username"/>
+                                       name="username" onChange={(evt) => this.changeAdminCode(evt)}/>
                             </div>
                         </div>
-                        <a href={this.LINK_TO_AUTH}><button className="register-button btn btn-primary" onClick={this.storeRegistrationInfo}>Spotify Register</button></a>
+                        <a href={this.LINK_TO_AUTH}><button className="register-button btn btn-primary"
+                                                            onClick={this.storeRegistrationInfo}>
+                            Spotify Register
+                        </button></a>
+
 
                     </div>
 

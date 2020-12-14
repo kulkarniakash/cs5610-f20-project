@@ -22,4 +22,8 @@ hr {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.textarea-new-post {
+    position: relative;
+    left: 150px;
 
+}

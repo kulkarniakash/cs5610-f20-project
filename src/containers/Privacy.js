@@ -1,5 +1,7 @@
 import React from "react";
 import "../css/Privacy.css"
+import {AUTH_REDIRECT_URI, CLIENT_ID, SPOTIFY_ACCOUNT_URL} from "../constants/spotifyAPIConstants";
+
 export default class Privacy extends React.Component {
     constructor(props) {
         super(props);
@@ -74,8 +76,16 @@ export default class Privacy extends React.Component {
                         <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</p>
                     </div>
                     <div>
-                        <button className="btn-success agree-btn">Agree</button>
-                        <button className="btn-danger decline-btn">Decline</button>
+                        <a href='/register'><button className="btn-success agree-btn">
+                            Agree
+                        </button></a>
+
+                        {/*<button className="btn-success agree-btn">Agree</button>*/}
+                        <a href='/'>
+                        <button className="btn-danger decline-btn">
+                            Decline
+                        </button>
+                        </a>
                     </div>
                 </div>
 

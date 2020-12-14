@@ -12,25 +12,52 @@ import MCCrudServices from "../../services/mc-crud-services/MCCrudServices";
 
 class NewsFeed extends React.Component {
 
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
             posts: null,
-            hasLoaded: false
+            hasLoaded: false,
         }
+
+        this.updatePosts =this.updatePosts.bind(this);
     }
 
     componentDidMount() {
+        this._isMounted = true;
         new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
         })
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+        this.setState({isMounted: false});
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if(!this._isMounted)
+            return;
+        new MCCrudServices().getAllPosts().then(postData => {
+            if(postData === prevState.posts) {
+                return;
+            }
+            this.setState({posts: postData, hasLoaded: true})
+        })
+    }
+
+    updatePosts() {
         new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
         })
     }
+
+    /*componentDidUpdate(prevProps, prevState, snapshot) {
+        new MCCrudServices().getAllPosts().then(postData => {
+            this.setState({posts: postData, hasLoaded: true})
+        })
+    }*/
 
     render() {
         if (!this.state.hasLoaded) {
@@ -56,7 +83,7 @@ class NewsFeed extends React.Component {
                 {
                     this.state.posts.map(post =>
                         <div key={post.id}>
-                            <NewsPost post={post}/>
+                            <NewsPost post={post} accessToken={this.props.accessToken} updatePost={this.updatePosts}/>
                         </div>
                     )
                 }
@@ -68,6 +95,7 @@ class NewsFeed extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     posts:state.loginFeedsReducer.posts,
+    accessToken: state.spotifyAuth.accessToken
 
 })
 

@@ -10,26 +10,35 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
         '&redirect_uri=' + AUTH_REDIRECT_URI;
     return (
         <nav className="navbar navbar-inverse" style={{borderRadius: 0}}>
-            <ul className="nav navbar-nav">
+            <ol className="nav navbar-nav">
                 <li><a href="/">Home</a></li>
                 <li><a href="#" className='about-us'>About Us</a></li>
 
-            </ul>
-            <ul className='nav nav-songs navbar-nav navbar-right'>
+            </ol>
+            <ol className='nav nav-songs navbar-nav navbar-right'>
                 {user !== null &&
                 <li><a href="/songs">Songs</a></li>
                 }
-            </ul>
+            </ol>
 
-            <ul className='nav navbar-nav navbar-right reported-posts'>
+
+
+            <ol className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {user === null &&
-                <li><button>Reported Posts</button></li>
+                    // <li><a href="/register">Register</a></li>
+                    <li><a href="/privacy">Register</a></li>
+                }
+            </ol>
+
+            <ul className='nav navbar-nav navbar-right reported-posts-one'>
+                {user !== null &&
+                <li><button className='btn-danger'>Reported Posts</button></li>
                 }
             </ul>
 
-            <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
-                {user === null &&
-                    <li><a href="/register">Register</a></li>
+            <ul className='nav navbar-nav navbar-right reported-posts-two' >
+                {user !== null &&
+                <li><button className='btn-success'>My feeds</button></li>
                 }
             </ul>
 
@@ -37,7 +46,7 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
                 {(user === null &&
                     <li><a href='/login' onClick={() => updateIsLoggedIn(true)}>Sign in</a></li>) ||
-                    <li><Link to='/logout' onClick={() => {
+                    <li className='sign-out-btn'><Link to='/logout' onClick={() => {
                         updateAuthCodeProp(null);
                         updateAccessTokenProp(null, null);
                         localStorage.setItem('auth_code', null);
@@ -51,11 +60,7 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
                 }
             </ul>
 
-            <ul className='nav navbar-nav navbar-right reported-posts'>
-                {user === null &&
-                <li><button>My feeds</button></li>
-                }
-            </ul>
+
         </nav>
     )
 }
