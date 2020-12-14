@@ -6,13 +6,23 @@
 
 .my-new-post {
     position:absolute;
-    left: 1000px;
+    left: 1100px;
     text-decoration: none;
     color: black;
 }
 
 .my-new-post:hover{
     text-decoration: none;
+}
+
+.my-feed-btn {
+    position:absolute;
+    left: 800px;
+}
+
+.btn-reported-post {
+    position:absolute;
+    left: 930px;
 }
 
 hr {

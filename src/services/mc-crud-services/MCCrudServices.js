@@ -17,8 +17,10 @@ export default class MCCrudServices {
     }
 
 
+
+
     deletePostByPostId = (pid, access_token) =>
-        fetch(JAVA_SERVER_URL + '/delete_post' + '/' + pid + "?access_token="
+        fetch(JAVA_SERVER_URL + 'delete_post' + '/' + pid + "?access_token="
             +access_token, {
             method: 'DELETE',
             headers: {
@@ -26,13 +28,21 @@ export default class MCCrudServices {
             }
         }).then(response => response.json())
 
-    // deletePostByPostId(pid) {
-    //     fetch(JAVA_SERVER_URL/${pid},{
-    //         method: "DELETE"
-    //     }).then(response => response.json())
-    //
-    // }
-    //updatePostByPostId
+    updatePostByPostId = (pid, access_token, post) =>
+    fetch(JAVA_SERVER_URL + 'update_post' + '/' + pid + "?access_token="
++access_token, {
+        method: "PUT",
+        body: JSON.stringify(post),
+        headers: {
+            'content-type': "application/json"
+        }
+}).then(response => response.json())
+
+    searchPosts = (keywords) =>
+    fetch(JAVA_SERVER_URL + 'search_posts?keywords=' + keywords).then(resp => resp.json());
+
+
+
     //findPostByUserId
 
 

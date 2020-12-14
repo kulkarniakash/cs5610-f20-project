@@ -30,17 +30,17 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
                 }
             </ol>
 
-            <ul className='nav navbar-nav navbar-right reported-posts-one'>
-                {user !== null &&
-                <li><button className='btn-danger'>Reported Posts</button></li>
-                }
-            </ul>
+            {/*<ul className='nav navbar-nav navbar-right reported-posts-one'>*/}
+            {/*    {user !== null &&*/}
+            {/*    <li><button className='btn-danger'>Reported Posts</button></li>*/}
+            {/*    }*/}
+            {/*</ul>*/}
 
-            <ul className='nav navbar-nav navbar-right reported-posts-two' >
-                {user !== null &&
-                <li><button className='btn-success'>My feeds</button></li>
-                }
-            </ul>
+            {/*<ul className='nav navbar-nav navbar-right reported-posts-two' >*/}
+            {/*    {user !== null &&*/}
+            {/*    <li><button className='btn-success'>My feeds</button></li>*/}
+            {/*    }*/}
+            {/*</ul>*/}
 
 
             <ul className='nav navbar-nav navbar-right' style={{marginRight: '20px'}}>
