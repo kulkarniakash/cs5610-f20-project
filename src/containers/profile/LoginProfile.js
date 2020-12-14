@@ -34,7 +34,7 @@ export default class LoginProfile extends React.Component {
 
                         </div>
 
-                        <a className="login-button btn btn-primary">Back to main page</a>
+                        <a className="login-button btn btn-primary" href='/'>Back to main page</a>
 
                     </div>
 

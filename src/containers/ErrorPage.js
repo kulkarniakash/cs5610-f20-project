@@ -11,7 +11,10 @@ export default class ErrorPage extends React.Component {
 
     render() {
         return(
-            <div>Error Page</div>
+            <div>
+                <h1>Error Page</h1>
+                <p>Please register first</p>
+            </div>
         )
     }
 }

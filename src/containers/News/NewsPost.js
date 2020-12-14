@@ -6,6 +6,8 @@ import 'font-awesome/css/font-awesome.css'
 import '../../css/NewsFeed.css'
 import '@fortawesome/fontawesome-free'
 import {Link} from "react-router-dom";
+import MCCrudServices from "../../services/mc-crud-services/MCCrudServices";
+import connect from "react-redux/lib/connect/connect";
 
 export default class NewsPost extends React.Component {
     constructor(props) {
@@ -14,9 +16,17 @@ export default class NewsPost extends React.Component {
             showLike: false,
             showComment: false,
             post: this.props.post,
+            editOrUpdate: true,
         }
         this.changeShowLike = this.changeShowLike.bind(this);
         this.changeShowComment = this.changeShowComment.bind(this);
+        this.changeEditOrUpdate = this.changeEditOrUpdate.bind(this);
+    }
+
+    changeEditOrUpdate() {
+        this.setState({
+            editOrUpdate:!this.state.editOrUpdate
+        })
     }
 
     changeShowLike() {
@@ -40,23 +50,52 @@ export default class NewsPost extends React.Component {
                             <div className="card-head">
                                 <span>
                                      <img className="avatar-img" src={require('../../photo.png')} className="avatar" />
-                                    <Link to={'/loginProfile/${this.state.post.id}'} className="card-title user-name">
+                                    <Link to={'/loginProfile/${this.state.post.user.id}'} className="card-title user-name">
                                         {this.state.post.user.username}
                                     </Link>
                                 </span>
 
-                                <select type="button" className="btn dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
+                                {/*<select type="button" className="btn dropdown-toggle" data-toggle="dropdown"*/}
+                                {/*        aria-haspopup="true" aria-expanded="false">*/}
 
-                                        <option value="1">Report</option>
+                                {/*        <option value="1">Report</option>*/}
+                                {/*        <option value="2">Update</option>*/}
+                                {/*        <option value="3">Delete</option>*/}
 
 
-                                </select>
 
+                                {/*</select>*/}
+
+                                <button onClick={() => new MCCrudServices().deletePostByPostId(this.state.post.id,
+                                    this.props.accessToken).then(resp => {this.props.updatePost()})}
+                                        className="btn dropdown-toggle delete-btn">
+                                    delete
+                                </button>
+                                {!this.state.editOrUpdate &&
+                                <button onClick={() => this.changeEditOrUpdate()}
+                                        className="btn dropdown-toggle update-btn">
+                                    update
+                                </button>
+                                }
+
+                                {this.state.editOrUpdate &&
+                                <button onClick={() => this.changeEditOrUpdate()}
+                                        className="btn dropdown-toggle update-btn">
+                                    Edit
+                                </button>
+                                }
 
                                 <hr/>
                             </div>
+
+                            {this.state.editOrUpdate &&
                             <p className="card-text text-wrap">{this.state.post.post}</p>
+                            }
+                            {!this.state.editOrUpdate &&
+                            <textarea className='textarea-new-post' placeholder="Update" id="story" name="story"
+                                      rows="5" cols="33">
+                            </textarea>
+                            }
                         </div>
                     {this.state.showLike &&
                         <button onClick={() => this.changeShowLike()} className='heart'><i

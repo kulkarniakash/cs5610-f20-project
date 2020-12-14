@@ -30,7 +30,9 @@ export default class AnonyProfile extends React.Component {
 
                         </div>
 
-                        <a className="login-button btn btn-primary anony-profile-btn">Back to main page</a>
+                        <a className="login-button btn btn-primary anony-profile-btn" href='/'>
+                            Back to main page
+                        </a>
 
                     </div>
 

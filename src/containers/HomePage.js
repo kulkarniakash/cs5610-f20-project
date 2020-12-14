@@ -79,7 +79,7 @@ class HomePage extends React.Component {
             }
 
             localStorage.setItem('register', 'false');
-            new MCAuthServices().registerUsername(user, searchParams.get('code')).then(resp => console.log(resp))
+            new MCAuthServices().registerUsername(user, searchParams.get('code'), localStorage.getItem('admin_code')).then(resp => console.log(resp))
             return;
         }
 
@@ -172,8 +172,13 @@ class HomePage extends React.Component {
                             {/*<Route path='/' children={<NewsPost/>}></Route>*/}
                             {/*<Route path='/' children={<SearchResults/>}/>*/}
                             {/*<Route path='/logout' children={<LogOutPage/>}/>*/}
+                            <Route path='/adminProfile' children={<AdminProfile/>}/>
+                            <Route path='/loginFirstPage' children={<NewsFeed/>}/>
+                            <Route path='/loginProfile/:pid' children={<LoginProfile/>}/>
+                            <Route path='/myprofile' children={<MyProfile/>}/>
                             <Route path='/songs' children={<SearchResults/>}/>
                             <Route path='/myprofile' children={<MyProfile/>}/>
+                            <Route path='/admin' children={<AdminFeed/>}/>
                             <Route path='/my-post' children={<MyPost/>}/>
 
                             <Route path='/' children={<NewsFeed/>}/>
@@ -185,13 +190,21 @@ class HomePage extends React.Component {
                 <Router>
                     <Switch>
                         {/*below are change route to login*/}
+
                         <Route path='/errorpage' children={<ErrorPage/>}/>
                         <Route path='/admin' children={<AdminFeed/>}></Route>
                         {/*<Route path='/adminProfile/:pid' children={<AdminProfile/>}/>*/}
                         <Route path='/adminProfile' children={<AdminProfile/>}/>
                         <Route path='/loginFirstPage' children={<NewsFeed/>}/>
                         <Route path='/loginProfile/:pid' children={<LoginProfile/>}/>
+                        {/*<Route path='/errorpage' children={<ErrorPage/>}/>*/}
+                        {/*<Route path='/admin' children={<AdminFeed/>}></Route>*/}
+                        {/*<Route path='/adminProfile' children={<AdminProfile/>}/>*/}
+                        {/*<Route path='/loginFirstPage' children={<NewsFeed/>}/>*/}
+                        {/*<Route path='/loginProfile/:pid' children={<LoginProfile/>}/>*/}
+                        {/*<Route path='/myprofile' children={<MyProfile/>}/>*/}
                         {/*above are change route to login*/}
+                        <Route path='/errorpage' children={<ErrorPage/>}/>
                         <Route path='/privacy' children={<Privacy/>}/>
                         <Route path='/login' children={<Login/>}/>
                         <Route path='/logout' children={<LogOutPage/>}/>

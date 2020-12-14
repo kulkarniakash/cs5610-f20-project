@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import MCCrudServices from "../services/mc-crud-services/MCCrudServices";
+import {Link} from "react-router-dom";
 
 class MyPost extends React.Component {
     constructor(props) {
@@ -24,13 +25,13 @@ class MyPost extends React.Component {
 
                             <div className="login-username col-sm-9">
                                 <textarea id="w3review" placeholder="whats up" name="w3review" rows="4" cols="50"
-                                onChange={(evt) => this.changePostContent(evt)}> </textarea>
+                                onChange={(evt) => this.changePostContent(evt)}/>
                             </div>
 
                         </div>
-                        <a href={"/"} onClick={() => new MCCrudServices().addPost(this.props.userObject.id, this.props.accessToken, {
+                        <Link to="/" onClick={() => new MCCrudServices().addPost(this.props.userObject.id, this.props.accessToken, {
                             post: this.state.post
-                        })} className="login-button btn btn-primary">Done</a>
+                        }).then(resp => console.log(resp))} className="login-button btn btn-primary">Done</Link>
 
                     </div>
 

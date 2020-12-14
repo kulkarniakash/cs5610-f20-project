@@ -13,12 +13,16 @@ import {getAllPosts} from "../../actions/mcCrudActions";
 
 class NewsFeed extends React.Component {
 
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
             posts: null,
-            hasLoaded: false
+            hasLoaded: false,
         }
+
+        this.updatePosts =this.updatePosts.bind(this);
     }
 
     componentDidMount() {
@@ -27,6 +31,22 @@ class NewsFeed extends React.Component {
         /*new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
         })*/
+    }
+
+
+    /*componentDidUpdate(prevProps, prevState, snapshot) {
+        new MCCrudServices().getAllPosts().then(postData => {
+            if(postData === prevState.posts) {
+                return;
+            }
+            this.setState({posts: postData, hasLoaded: true})
+        })
+    }*/
+
+    updatePosts() {
+        new MCCrudServices().getAllPosts().then(postData => {
+            this.setState({posts: postData, hasLoaded: true})
+        })
     }
 
     /*componentDidUpdate(prevProps, prevState, snapshot) {
@@ -59,7 +79,7 @@ class NewsFeed extends React.Component {
                 {
                     this.props.posts.map(post =>
                         <div key={post.id}>
-                            <NewsPost post={post}/>
+                            <NewsPost post={post} accessToken={this.props.accessToken} updatePost={this.updatePosts}/>
                         </div>
                     )
                 }
@@ -71,6 +91,7 @@ class NewsFeed extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     posts:state.loginFeedsReducer.posts,
+    accessToken: state.spotifyAuth.accessToken
 
 })
 
