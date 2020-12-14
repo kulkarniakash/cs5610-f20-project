@@ -16,9 +16,12 @@ export default class MCCrudServices {
         return fetch(JAVA_SERVER_URL + 'posts').then(resp => resp.json());
     }
 
+    getUserById(uid) {
+        return fetch(JAVA_SERVER_URL + 'user?uid=' + uid).then(user => user.json())
+    }
 
     deletePostByPostId = (pid, access_token) =>
-        fetch(JAVA_SERVER_URL + '/delete_post' + '/' + pid + "?access_token="
+        fetch(JAVA_SERVER_URL + 'delete_post' + '/' + pid + "?access_token="
             +access_token, {
             method: 'DELETE',
             headers: {
@@ -34,7 +37,5 @@ export default class MCCrudServices {
     // }
     //updatePostByPostId
     //findPostByUserId
-
-
 
 }

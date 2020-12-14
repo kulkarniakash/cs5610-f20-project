@@ -9,8 +9,9 @@ import {combineReducers, createStore, compose} from "redux";
 import authReducer from "./reducers/authReducer";
 import {loginFeedsReducer} from "./reducers/loginFeedsReducer";
 import {anonyFeedsReducer} from "./reducers/anonyFeedsReducer";
+import {mcAuthReducer} from "./reducers/mcAuthReducer";
 
-const rootReducer = combineReducers({spotifyAuth: authReducer, loginFeedsReducer: loginFeedsReducer, anonyFeedsReducer})
+const rootReducer = combineReducers({spotifyAuth: authReducer, mcAuthUser: mcAuthReducer, loginFeedsReducer: loginFeedsReducer, anonyFeedsReducer})
 
 const enhancers = compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -27,6 +28,16 @@ export default class App extends React.Component {
               refreshToken: null,
               currentUserObject: null,
               isLoggedIn: false
+          },
+          mcAuthUser: {
+              id: null,
+              username: null,
+              first_name: null,
+              last_name: null,
+              is_admin: null,
+              posts: null,
+              followers: null,
+              followees: null
           }
       }
     }
