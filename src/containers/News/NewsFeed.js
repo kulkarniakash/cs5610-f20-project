@@ -9,6 +9,7 @@ import NewsPost from "./NewsPost";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import MCCrudServices from "../../services/mc-crud-services/MCCrudServices";
+import {getAllPosts} from "../../actions/mcCrudActions";
 
 class NewsFeed extends React.Component {
 
@@ -26,16 +27,13 @@ class NewsFeed extends React.Component {
     }
 
     componentDidMount() {
-        this._isMounted = true;
-        new MCCrudServices().getAllPosts().then(postData => {
+        this.props.updatePosts()
+        this.setState({hasLoaded: true})
+        /*new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
-        })
+        })*/
     }
 
-    componentWillUnmount() {
-        this._isMounted = false;
-        this.setState({isMounted: false});
-    }
 
     // componentDidUpdate(prevProps, prevState, snapshot) {
     //     if(!this._isMounted)
@@ -47,6 +45,7 @@ class NewsFeed extends React.Component {
     //         this.setState({posts: postData, hasLoaded: true})
     //     })
     // }
+
 
     updatePosts() {
         new MCCrudServices().getAllPosts().then(postData => {
@@ -100,7 +99,7 @@ class NewsFeed extends React.Component {
                 <hr/>
                 {console.log(this.state.posts)}
                 {
-                    this.state.posts.map(post =>
+                    this.props.posts.map(post =>
                         <div key={post.id}>
                             <NewsPost post={post} accessToken={this.props.accessToken} updatePost={this.updatePosts}/>
                         </div>
@@ -119,7 +118,7 @@ const stateToPropertyMapper = (state) => ({
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
-
+    updatePosts: () => getAllPosts(dispatch)
 })
 
 export default connect

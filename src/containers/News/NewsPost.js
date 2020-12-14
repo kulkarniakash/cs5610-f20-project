@@ -107,6 +107,7 @@ export default class NewsPost extends React.Component {
 
                                 <hr/>
                             </div>
+
                             {this.state.editOrUpdate &&
                             <p className="card-text text-wrap">{this.state.post.post}</p>
                             }
