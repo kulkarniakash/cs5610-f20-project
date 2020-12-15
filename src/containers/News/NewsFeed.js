@@ -53,6 +53,12 @@ class NewsFeed extends React.Component {
         })
     }
 
+    findMyPosts(posts) {
+        for (i )
+    }
+
+
+
     /*componentDidUpdate(prevProps, prevState, snapshot) {
         new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
@@ -86,9 +92,9 @@ class NewsFeed extends React.Component {
 
                     <button className='btn btn-outline-danger my-feed-btn'
                             onClick={() => new MCCrudServices().getAllPosts().then(postData => {
-                                this.setState({posts: postData})
+                                this.filter(postData)
                             })
-                            }>My feeds</button>
+                            }>My Posts</button>
 
                     <button className='btn btn-outline-danger btn-reported-post'>Reported Posts</button>
 
