@@ -14,7 +14,7 @@ class AdminFeed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showLike: false
+            showLike: false,
         }
     }
 
