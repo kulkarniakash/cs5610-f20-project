@@ -44,7 +44,15 @@ export default class MCCrudServices {
     searchPosts = (keywords) =>
     fetch(JAVA_SERVER_URL + 'search_posts?keywords=' + keywords).then(resp => resp.json());
 
-
+    updateUser(user, access_token) {
+        return fetch(JAVA_SERVER_URL + 'edit_user_profile?access_token=' + access_token, {
+            method: 'PUT',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': "application/json"
+            }
+        }).then(resp => resp.json())
+    }
 
     //findPostByUserId
 

@@ -52,9 +52,6 @@ class NewsFeed extends React.Component {
         })
     }
 
-
-
-
     /*componentDidUpdate(prevProps, prevState, snapshot) {
         new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
@@ -78,7 +75,8 @@ class NewsFeed extends React.Component {
                     }} />
                     <button onClick={
                         () => new MCCrudServices().searchPosts(this.state.searchText)
-                            .then(posts => {this.setState({
+                            .then(posts => {                     
+                                this.setState({
                                 postsState:posts.posts
                             })})
                     }
