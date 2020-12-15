@@ -37,7 +37,7 @@ class myProfile extends React.Component {
     }
 
     saveData() {
-        new MCCrudServices().updateUser(this.state.user, this.props.spotAuth.accessToken).then(resp => {
+        new MCCrudServices().updateUser({...this.state.user, posts: []}, this.props.spotAuth.accessToken).then(resp => {
                 console.log(resp)
                 this.props.updateCurrentUserObj(this.props.spotifyUser.id)
                 this.setState({isEditing: false})
