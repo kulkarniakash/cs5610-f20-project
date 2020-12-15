@@ -43,7 +43,7 @@ export default class AnonyPost extends React.Component {
                                 <span>
                                     {/*<img className="avatar-img" src="../../photo.png" className="avatar"/>*/}
                                     <img className="avatar-img" src={require('../../photo.png')} className="avatar" />
-                                    <Link to={'/profile/${this.state.post.id}'} className="card-title user-name">
+                                    <Link to={'/profile/'+ this.state.post.user.id} className="card-title user-name">
                                         {this.state.post.user.username}
                                     </Link>
                                     {/*<a href="#" className="card-title user-name">{this.state.post.username}</a>*/}

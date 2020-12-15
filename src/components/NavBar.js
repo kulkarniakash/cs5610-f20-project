@@ -31,7 +31,8 @@ const NavBar = ({user, updateIsLoggedIn, updateAuthCodeProp, updateAccessTokenPr
         <nav className="navbar navbar-inverse" style={{borderRadius: 0}}>
             <ol className="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="#" className='about-us'>About Us</a></li>
+                <li><a href="/privacy-policy" className='about-us'>Privacy Policy</a></li>
+                {/*<li><a href="" className='privacy-policy'></a></li>*/}
 
             </ol>
             <ol className='nav nav-songs navbar-nav navbar-right'>

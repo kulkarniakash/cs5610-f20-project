@@ -18,7 +18,7 @@ class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: null,
+            postsState: null,
             hasLoaded: false,
             searchText: null
         }
@@ -28,10 +28,9 @@ class NewsFeed extends React.Component {
 
     componentDidMount() {
         this.props.updatePosts()
-        this.setState({hasLoaded: true})
-        /*new MCCrudServices().getAllPosts().then(postData => {
-            this.setState({posts: postData, hasLoaded: true})
-        })*/
+        new MCCrudServices().getAllPosts().then(postData => {
+            this.setState({postsState: postData, hasLoaded: true})
+        })
     }
 
 
@@ -49,13 +48,10 @@ class NewsFeed extends React.Component {
 
     updatePosts() {
         new MCCrudServices().getAllPosts().then(postData => {
-            this.setState({posts: postData, hasLoaded: true})
+            this.setState({postsState: postData, hasLoaded: true})
         })
     }
 
-    findMyPosts(posts) {
-        for (i )
-    }
 
 
 
@@ -83,29 +79,29 @@ class NewsFeed extends React.Component {
                     <button onClick={
                         () => new MCCrudServices().searchPosts(this.state.searchText)
                             .then(posts => {this.setState({
-                                posts:posts.posts
+                                postsState:posts.posts
                             })})
                     }
                             className='btn btn-outline-danger'>
                         Search
                     </button>
 
-                    <button className='btn btn-outline-danger my-feed-btn'
-                            onClick={() => new MCCrudServices().getAllPosts().then(postData => {
-                                this.filter(postData)
-                            })
+                    <button className='btn btn-outline-danger btn-reported-post'
+                            onClick={() => new MCCrudServices().getUserById(this.props.currentUserObject.id)
+                                .then(user => {this.setState({
+                                    postsState: user.posts
+                                })})
                             }>My Posts</button>
 
-                    <button className='btn btn-outline-danger btn-reported-post'>Reported Posts</button>
+                    {/*<button className='btn btn-outline-danger btn-reported-post'>Reported Posts</button>*/}
 
 
                     <Link to={'/my-post'} className='my-new-post'>My New Post</Link>
                 </div>
 
                 <hr/>
-                {console.log(this.state.posts)}
                 {
-                    this.props.posts.map(post =>
+                    this.state.postsState.map(post =>
                         <div key={post.id}>
                             <NewsPost post={post} accessToken={this.props.accessToken} updatePost={this.updatePosts}/>
                         </div>
@@ -119,7 +115,8 @@ class NewsFeed extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     posts:state.loginFeedsReducer.posts,
-    accessToken: state.spotifyAuth.accessToken
+    accessToken: state.spotifyAuth.accessToken,
+    currentUserObject: state.spotifyAuth.currentUserObject,
 
 })
 
