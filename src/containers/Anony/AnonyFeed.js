@@ -34,7 +34,7 @@ class AnonyFeed extends React.Component {
                         this.updateSearchResults()
                 }}/>
                 <button className='btn btn-outline-danger' onClick={() => {
-                    this.updateSearchResults()
+                    this.props.updatePosts()
                 }}>Search</button>
 
                 <hr/>

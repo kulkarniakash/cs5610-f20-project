@@ -18,7 +18,7 @@ class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: null,
+            postsState: null,
             hasLoaded: false,
             searchText: null
         }
@@ -28,10 +28,9 @@ class NewsFeed extends React.Component {
 
     componentDidMount() {
         this.props.updatePosts()
-        this.setState({hasLoaded: true})
-        /*new MCCrudServices().getAllPosts().then(postData => {
-            this.setState({posts: postData, hasLoaded: true})
-        })*/
+        new MCCrudServices().getAllPosts().then(postData => {
+            this.setState({postsState: postData, hasLoaded: true})
+        })
     }
 
 
@@ -49,12 +48,8 @@ class NewsFeed extends React.Component {
 
     updatePosts() {
         new MCCrudServices().getAllPosts().then(postData => {
-            this.setState({posts: postData, hasLoaded: true})
+            this.setState({postsState: postData, hasLoaded: true})
         })
-    }
-
-    findMyPosts(posts) {
-        for (i )
     }
 
 
@@ -82,8 +77,10 @@ class NewsFeed extends React.Component {
                     }} />
                     <button onClick={
                         () => new MCCrudServices().searchPosts(this.state.searchText)
-                            .then(posts => {this.setState({
-                                posts:posts.posts
+                            .then(posts => {
+                                console.log("searched posts")
+                                this.setState({
+                                postsState:posts.posts
                             })})
                     }
                             className='btn btn-outline-danger'>
@@ -103,9 +100,9 @@ class NewsFeed extends React.Component {
                 </div>
 
                 <hr/>
-                {console.log(this.state.posts)}
+                {console.log(this.state.postsState)}
                 {
-                    this.props.posts.map(post =>
+                    this.state.postsState.map(post =>
                         <div key={post.id}>
                             <NewsPost post={post} accessToken={this.props.accessToken} updatePost={this.updatePosts}/>
                         </div>
