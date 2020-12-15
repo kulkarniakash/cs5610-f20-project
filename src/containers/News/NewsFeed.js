@@ -52,8 +52,6 @@ class NewsFeed extends React.Component {
         })
     }
 
-
-
     /*componentDidUpdate(prevProps, prevState, snapshot) {
         new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
@@ -77,8 +75,7 @@ class NewsFeed extends React.Component {
                     }} />
                     <button onClick={
                         () => new MCCrudServices().searchPosts(this.state.searchText)
-                            .then(posts => {
-                                console.log("searched posts")
+                            .then(posts => {                     
                                 this.setState({
                                 postsState:posts.posts
                             })})
@@ -87,20 +84,20 @@ class NewsFeed extends React.Component {
                         Search
                     </button>
 
-                    <button className='btn btn-outline-danger my-feed-btn'
-                            onClick={() => new MCCrudServices().getAllPosts().then(postData => {
-                                this.filter(postData)
-                            })
+                    <button className='btn btn-outline-danger btn-reported-post'
+                            onClick={() => new MCCrudServices().getUserById(this.props.currentUserObject.id)
+                                .then(user => {this.setState({
+                                    postsState: user.posts
+                                })})
                             }>My Posts</button>
 
-                    <button className='btn btn-outline-danger btn-reported-post'>Reported Posts</button>
+                    {/*<button className='btn btn-outline-danger btn-reported-post'>Reported Posts</button>*/}
 
 
                     <Link to={'/my-post'} className='my-new-post'>My New Post</Link>
                 </div>
 
                 <hr/>
-                {console.log(this.state.postsState)}
                 {
                     this.state.postsState.map(post =>
                         <div key={post.id}>
@@ -116,7 +113,8 @@ class NewsFeed extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     posts:state.loginFeedsReducer.posts,
-    accessToken: state.spotifyAuth.accessToken
+    accessToken: state.spotifyAuth.accessToken,
+    currentUserObject: state.spotifyAuth.currentUserObject,
 
 })
 

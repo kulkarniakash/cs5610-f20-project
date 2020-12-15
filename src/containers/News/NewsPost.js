@@ -8,6 +8,7 @@ import '@fortawesome/fontawesome-free'
 import {Link} from "react-router-dom";
 import MCCrudServices from "../../services/mc-crud-services/MCCrudServices";
 import connect from "react-redux/lib/connect/connect";
+import {getAllPosts} from "../../actions/mcCrudActions";
 
 export default class NewsPost extends React.Component {
     constructor(props) {
@@ -62,7 +63,7 @@ export default class NewsPost extends React.Component {
                             <div className="card-head">
                                 <span>
                                      <img className="avatar-img" src={require('../../photo.png')} className="avatar" />
-                                    <Link to={'/loginProfile/${this.state.post.user.id}'} className="card-title user-name">
+                                    <Link to={'/loginProfile/' + this.state.post.user.id} className="card-title user-name">
                                         {this.state.post.user.username}
                                     </Link>
                                 </span>
@@ -163,3 +164,7 @@ export default class NewsPost extends React.Component {
         )
     }
 }
+
+
+
+

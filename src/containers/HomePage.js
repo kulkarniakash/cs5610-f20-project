@@ -24,6 +24,7 @@ import ErrorPage from "./ErrorPage";
 import AdminProfile from "./profile/AdminProfile";
 import MyProfile from "./profile/MyProfile";
 import Privacy from "./Privacy";
+import PrivacyPolicy from "./PrivacyPolicy";
 
 class HomePage extends React.Component {
 
@@ -172,6 +173,7 @@ class HomePage extends React.Component {
                             {/*<Route path='/' children={<NewsPost/>}></Route>*/}
                             {/*<Route path='/' children={<SearchResults/>}/>*/}
                             {/*<Route path='/logout' children={<LogOutPage/>}/>*/}
+                            <Route path='/privacy-policy' children={<PrivacyPolicy/>}/>
                             <Route path='/adminProfile' children={<AdminProfile/>}/>
                             <Route path='/loginFirstPage' children={<NewsFeed/>}/>
                             <Route path='/loginProfile/:pid' children={<LoginProfile/>}/>
@@ -190,9 +192,8 @@ class HomePage extends React.Component {
                 <Router>
                     <Switch>
                         {/*below are change route to login*/}
-
+                        <Route path='/privacy-policy' children={<PrivacyPolicy/>}/>
                         <Route path='/errorpage' children={<ErrorPage/>}/>
-                        <Route path='/admin' children={<AdminFeed/>}></Route>
                         {/*<Route path='/adminProfile/:pid' children={<AdminProfile/>}/>*/}
                         <Route path='/adminProfile' children={<AdminProfile/>}/>
                         <Route path='/loginFirstPage' children={<NewsFeed/>}/>
