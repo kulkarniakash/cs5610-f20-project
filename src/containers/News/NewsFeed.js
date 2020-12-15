@@ -20,6 +20,7 @@ class NewsFeed extends React.Component {
         this.state = {
             posts: null,
             hasLoaded: false,
+            searchText: null
         }
 
         this.updatePosts =this.updatePosts.bind(this);
@@ -34,20 +35,29 @@ class NewsFeed extends React.Component {
     }
 
 
-    /*componentDidUpdate(prevProps, prevState, snapshot) {
-        new MCCrudServices().getAllPosts().then(postData => {
-            if(postData === prevState.posts) {
-                return;
-            }
-            this.setState({posts: postData, hasLoaded: true})
-        })
-    }*/
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if(!this._isMounted)
+    //         return;
+    //     new MCCrudServices().getAllPosts().then(postData => {
+    //         if(postData === prevState.posts) {
+    //             return;
+    //         }
+    //         this.setState({posts: postData, hasLoaded: true})
+    //     })
+    // }
+
 
     updatePosts() {
         new MCCrudServices().getAllPosts().then(postData => {
             this.setState({posts: postData, hasLoaded: true})
         })
     }
+
+    findMyPosts(posts) {
+        for (i )
+    }
+
+
 
     /*componentDidUpdate(prevProps, prevState, snapshot) {
         new MCCrudServices().getAllPosts().then(postData => {
@@ -70,12 +80,30 @@ class NewsFeed extends React.Component {
                             searchText: evt.target.value
                         })
                     }} />
-                    <button className='btn btn-outline-danger' >Search</button>
+                    <button onClick={
+                        () => new MCCrudServices().searchPosts(this.state.searchText)
+                            .then(posts => {this.setState({
+                                posts:posts.posts
+                            })})
+                    }
+                            className='btn btn-outline-danger'>
+                        Search
+                    </button>
+
+                    <button className='btn btn-outline-danger my-feed-btn'
+                            onClick={() => new MCCrudServices().getAllPosts().then(postData => {
+                                this.filter(postData)
+                            })
+                            }>My Posts</button>
+
+                    <button className='btn btn-outline-danger btn-reported-post'>Reported Posts</button>
+
 
                     <Link to={'/my-post'} className='my-new-post'>My New Post</Link>
                 </div>
 
                 <hr/>
+                {console.log(this.state.posts)}
                 {
                     this.props.posts.map(post =>
                         <div key={post.id}>

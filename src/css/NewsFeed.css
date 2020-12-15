@@ -168,5 +168,12 @@ hr {
 }
 
 .delete-btn {
+    position: absolute;
+    left: 800px;
     background-color: rosybrown;
+}
+
+.update-btn {
+    position: absolute;
+    left: 870px;
 }

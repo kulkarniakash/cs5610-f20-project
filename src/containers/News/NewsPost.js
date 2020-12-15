@@ -17,10 +17,12 @@ export default class NewsPost extends React.Component {
             showComment: false,
             post: this.props.post,
             editOrUpdate: true,
+            editText: null,
         }
         this.changeShowLike = this.changeShowLike.bind(this);
         this.changeShowComment = this.changeShowComment.bind(this);
         this.changeEditOrUpdate = this.changeEditOrUpdate.bind(this);
+        this.changeEditText = this.changeEditText.bind(this);
     }
 
     changeEditOrUpdate() {
@@ -40,6 +42,16 @@ export default class NewsPost extends React.Component {
             showComment: !this.state.showComment
         })
     }
+
+    changeEditText(text) {
+        this.setState({editText: text})
+    }
+
+    // updatePostByPostId(pid, access_token, text) {
+    //     new MCCrudServices().updatePostByPostId(pid, access_token, text).then(postData => {
+    //         this.setState({posts: postData, hasLoaded: true})
+    //     })
+    // }
 
     render() {
         return (
@@ -66,13 +78,21 @@ export default class NewsPost extends React.Component {
 
                                 {/*</select>*/}
 
-                                <button onClick={() => new MCCrudServices().deletePostByPostId(this.state.post.id,
-                                    this.props.accessToken).then(resp => {this.props.updatePost()})}
+                                <button onClick={
+                                    () => new MCCrudServices().deletePostByPostId(this.state.post.id,
+                                    this.props.accessToken).then(resp => {this.props.updatePost()})
+                                }
                                         className="btn dropdown-toggle delete-btn">
                                     delete
                                 </button>
                                 {!this.state.editOrUpdate &&
-                                <button onClick={() => this.changeEditOrUpdate()}
+                                <button onClick={() => {this.changeEditOrUpdate();
+                                const post = {
+                                    ...this.state.post,
+                                    post: this.state.editText
+                                }
+                                new MCCrudServices().updatePostByPostId(this.state.post.id,
+                                    this.props.accessToken, post).then(resp => {this.props.updatePost()})}}
                                         className="btn dropdown-toggle update-btn">
                                     update
                                 </button>
@@ -92,8 +112,13 @@ export default class NewsPost extends React.Component {
                             <p className="card-text text-wrap">{this.state.post.post}</p>
                             }
                             {!this.state.editOrUpdate &&
-                            <textarea className='textarea-new-post' placeholder="Update" id="story" name="story"
-                                      rows="5" cols="33">
+
+
+                            <textarea className='textarea-new-post' defaultValue={this.state.post.post} id="story" name="story"
+                                      rows="5" cols="33" onChange={(evt) =>
+                            {
+                                this.changeEditText(evt.target.value)
+                            }}>
                             </textarea>
                             }
                         </div>
